@@ -118,6 +118,87 @@ const characters = [
   },
 ];
 
+// const App = () => {
+//   const [currChar, setCurrChar] = useState({
+//     name: "",
+//     role: "",
+//     abilities: [],
+//     options: [],
+//   });
+
+//   const [score, setScore] = useState(0);
+
+//   const changeChar = () => {
+//     const random1=Math.floor(Math.random()*19);
+//     const random2=Math.floor(Math.random()*19);
+//     const random3=Math.floor(Math.random()*19);
+//     const random4=Math.floor(Math.random()*19);
+ 
+
+//   const obj={
+//     name: characters[random1].name,
+//     role: characters[random1].role,
+//     abilities: characters[random1].abilities,
+//     options: [characters[random1],characters[random2], characters[random3],characters[random4]],
+//   }
+// };
+
+//   const scoreHandler = (event) => {
+    
+//     event.persist();
+//     console.log( event._targetInst.key);
+    
+//     if( event._targetInst.key ==0){
+//       setScore(score + 1);
+//     }
+//     else{
+//       setScore(score-1);
+//     }
+//     //console.log(event);
+//     changeChar();
+
+//   };
+
+//   useEffect(() => {
+//     const random1=Math.floor(Math.random()*19);
+//     const random2=Math.floor(Math.random()*19);
+//     const random3=Math.floor(Math.random()*19);
+//     const random4=Math.floor(Math.random()*19);
+ 
+
+//   const obj={
+//     name: characters[random1].name,
+//     role: characters[random1].role,
+//     abilities: characters[random1].abilities,
+//     options: [characters[random1],characters[random2], characters[random3],characters[random4]],
+//   }
+//   setCurrChar(obj);
+//   }, [])
+
+//   return (
+//     <div id="main">
+//       <div className="container">
+//         <h1 className="header">Guess the Character</h1>
+//         <div className="ques-area">
+//           <div className="score" id='score'>Score: {score}</div>
+//           <h3>The character has the following abilities:</h3>
+//           <h4>Role: {currChar.role}</h4>
+//           {currChar.abilities.join()}
+//           <div className="options">
+//             {currChar.options.map((option) => (
+//               <button   onClick={scoreHandler}>
+//                 {option.name}
+//               </button>
+//             ))}
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default App;
+
 const App = () => {
   const [currChar, setCurrChar] = useState({
     name: "",
@@ -129,16 +210,50 @@ const App = () => {
   const [score, setScore] = useState(0);
 
   const changeChar = () => {
-    
-  };
+    const random =Math.floor(Math.random()*19);
+    const random2= Math.floor(Math.random()*19);
+    const random3= Math.floor(Math.random()*19);
+    const random4= Math.floor(Math.random()*19);
 
+
+    const characterObj= {
+       name :characters[random].name,
+       role: characters[random].role,
+       abilities: characters[random].abilities,
+         options:[characters[random],characters[random2],characters[random3],characters[random4]]
+    }
+    console.log(characterObj);
+   setCurrChar(characterObj);
+  };
   const scoreHandler = (e) => {
-   
+    e.persist();
+    console.log( e._targetInst.key);
+    
+    if( e._targetInst.key ==0){
+      setScore(score + 1);
+    }
+    else{
+      setScore(score -1);
+    }
+    changeChar();
   };
 
   useEffect(() => {
-   
-  });
+    const random =Math.floor(Math.random()*19);
+    const random2= Math.floor(Math.random()*19);
+    const random3= Math.floor(Math.random()*19);
+    const random4= Math.floor(Math.random()*19);
+    
+    const characterObj= {
+       name :characters[random].name,
+       role: characters[random].role,
+       abilities: characters[random].abilities,
+      
+         options:[characters[random],characters[random2],characters[random3],characters[random4]]
+    }
+    console.log(characterObj);
+   setCurrChar(characterObj);
+  },[]);
   return (
     <div id="main">
       <div className="container">
@@ -149,8 +264,8 @@ const App = () => {
           <h4>Role: {currChar.role}</h4>
           {currChar.abilities.join()}
           <div className="options">
-            {currChar.options.map((option) => (
-              <button   onClick={scoreHandler}>
+            {currChar.options.map((option,index) => (
+              <button   onClick={(event)=>(scoreHandler(event))} key={index} >
                 {option.name}
               </button>
             ))}
@@ -160,5 +275,4 @@ const App = () => {
     </div>
   );
 };
-
 export default App;
